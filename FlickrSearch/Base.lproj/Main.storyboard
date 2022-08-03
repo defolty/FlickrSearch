@@ -41,6 +41,9 @@
                                         <constraint firstItem="ebX-NR-0zP" firstAttribute="leading" secondItem="kBH-gH-Hh4" secondAttribute="leading" id="yTe-YG-QtC"/>
                                     </constraints>
                                 </collectionViewCellContentView>
+                                <connections>
+                                    <outlet property="imageView" destination="ebX-NR-0zP" id="J5f-a6-zNr"/>
+                                </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>

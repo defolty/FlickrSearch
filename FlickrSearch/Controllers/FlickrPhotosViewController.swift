@@ -93,8 +93,13 @@ extension FlickrPhotosViewController {
     ///# В противном случае возникнет ошибка времени выполнения`(runtime error)`
     override func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-        cell.backgroundColor = .black
+        ///# Теперь возвращаемая ячейка - это `FlickrPhotoCell`
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FlickrPhotoCell
+        ///# Вам нужно получить `FlickrPhoto`, представляющее фотографию для отображения, используя метод удобства, описанный заранее.
+        let flickrPhoto = photo(for: indexPath)
+        cell.backgroundColor = .white
+        ///# Вы заполняете представление изображения миниатюрой.
+        cell.imageView.image = flickrPhoto.thumbnail
         
         return cell
     }
