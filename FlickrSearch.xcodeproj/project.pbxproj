@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FB610F4728A5820200B90A18 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB610F4628A5820200B90A18 /* Constants.swift */; };
 		FBBE284A289AE27700EDCE6C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FBBE2849289AE27700EDCE6C /* AppDelegate.swift */; };
 		FBBE2851289AE27700EDCE6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FBBE284F289AE27700EDCE6C /* Main.storyboard */; };
 		FBBE2853289AE27800EDCE6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FBBE2852289AE27800EDCE6C /* Assets.xcassets */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FB610F4628A5820200B90A18 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		FBBE2846289AE27700EDCE6C /* FlickrSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlickrSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FBBE2849289AE27700EDCE6C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FBBE2850289AE27700EDCE6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -43,6 +45,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FB610F4828A5820500B90A18 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				FB610F4628A5820200B90A18 /* Constants.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		FBBE283D289AE27700EDCE6C = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +80,7 @@
 				FBBE2863289AE2CB00EDCE6C /* FlickrFiles */,
 				FBBE2868289AF9D200EDCE6C /* Controllers */,
 				FBBE2869289AF9E700EDCE6C /* Cells */,
+				FB610F4828A5820500B90A18 /* Helpers */,
 			);
 			path = FlickrSearch;
 			sourceTree = "<group>";
@@ -175,6 +186,7 @@
 				FBBE2862289AE2C300EDCE6C /* FlickrSearchResults.swift in Sources */,
 				FBBE284A289AE27700EDCE6C /* AppDelegate.swift in Sources */,
 				FBBE285E289AE2AD00EDCE6C /* Flickr.swift in Sources */,
+				FB610F4728A5820200B90A18 /* Constants.swift in Sources */,
 				FBBE2860289AE2B600EDCE6C /* FlickrPhoto.swift in Sources */,
 				FBBE2867289AF9C800EDCE6C /* FlickrPhotoCell.swift in Sources */,
 			);

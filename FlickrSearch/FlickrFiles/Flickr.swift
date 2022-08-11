@@ -6,9 +6,7 @@
 //
 
 import UIKit
-
-let apiKey = "69621e7f8cf564b6c00d6e93264243f1"
-
+ 
 class Flickr {
     enum Error: Swift.Error {
         case unknownAPIResponse
@@ -27,19 +25,14 @@ class Flickr {
                 return
             }
             
-            guard
-                (response as? HTTPURLResponse) != nil,
-                let data = data
-            else {
+            guard (response as? HTTPURLResponse) != nil, let data = data else {
                 completion(.failure(Error.unknownAPIResponse))
                 return
             }
             
             do {
-                guard
-                    let resultsDictionary = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject],
-                    let stat = resultsDictionary["stat"] as? String
-                else {
+                guard let resultsDictionary = try JSONSerialization.jsonObject(with: data) as? [String: AnyObject],
+                        let stat = resultsDictionary["stat"] as? String else {
                     completion(.failure(Error.unknownAPIResponse))
                     return
                 }
@@ -55,10 +48,8 @@ class Flickr {
                     return
                 }
                 
-                guard
-                    let photosContainer = resultsDictionary["photos"] as? [String: AnyObject],
-                    let photosReceived = photosContainer["photo"] as? [[String: AnyObject]]
-                else {
+                guard let photosContainer = resultsDictionary["photos"] as? [String: AnyObject],
+                    let photosReceived = photosContainer["photo"] as? [[String: AnyObject]] else {
                     completion(.failure(Error.unknownAPIResponse))
                     return
                 }
@@ -109,7 +100,7 @@ class Flickr {
             return nil
         }
         
-        let URLString = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(apiKey)&text=\(escapedTerm)&per_page=20&format=json&nojsoncallback=1"
+        let URLString = "https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=\(Constants.apiKey)&text=\(escapedTerm)&per_page=20&format=json&nojsoncallback=1"
         return URL(string: URLString)
     }
 }

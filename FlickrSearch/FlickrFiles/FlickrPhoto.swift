@@ -50,12 +50,10 @@ class FlickrPhoto: Equatable {
                     completion(.failure(error))
                     return
                 }
-                
                 guard let data = data else {
                     completion(.failure(Error.noData))
                     return
                 }
-                
                 let returnedImage = UIImage(data: data)
                 self.largeImage = returnedImage
                 completion(.success(self))
@@ -68,19 +66,15 @@ class FlickrPhoto: Equatable {
         guard let thumbnail = thumbnail else {
             return size
         }
-        
         let imageSize = thumbnail.size
         var returnSize = size
-        
         let aspectRatio = imageSize.width / imageSize.height
-        
         returnSize.height = returnSize.width / aspectRatio
         
         if returnSize.height > size.height {
             returnSize.height = size.height
             returnSize.width = size.height * aspectRatio
-        }
-        
+        } 
         return returnSize
     }
     

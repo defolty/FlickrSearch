@@ -6,8 +6,7 @@
 //
 
 import UIKit
-// 69621e7f8cf564b6c00d6e93264243f1
-// 45c4ebff0d031ff0
+ 
 final class FlickrPhotosViewController: UICollectionViewController {
     
     private let reuseIdentifier = "FlickrCell"
@@ -25,22 +24,20 @@ final class FlickrPhotosViewController: UICollectionViewController {
 }
 
 private extension FlickrPhotosViewController {
-    ///# `photo(for:)` - это удобный метод, который позволяет получить конкретную фотографию,
+    ///# `photo(for:)` - метод, который позволяет получить конкретную фотографию,
     ///# связанную с `IndexPath` в представлении коллекции.
-    ///# Вы будете часто обращаться к фотографии для определенного `IndexPath`, и вам не захочется повторять код.
     func photo(for indexPath: IndexPath) -> FlickrPhoto {
         return searches[indexPath.section].searchResults[indexPath.row]
     }
 }
-
-///# Hold the text field delegate methods:
+ 
 extension FlickrPhotosViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         guard let text = textField.text, !text.isEmpty else { return true }
         
-        ///# После добавления `ActivityView` вы используете класс-обертку Flickr для асинхронного поиска фотографий Flickr,
-        ///#  соответствующих заданному поисковому запросу.
-        ///# Когда поиск завершается, вы вызываете блок завершения с набором объектов `FlickrPhoto` и любыми ошибками.
+        ///# После добавления `ActivityView` используем класс-обертку Flickr для асинхронного поиска фотографий Flickr,
+        ///# соответствующих заданному поисковому запросу.
+        ///# Когда поиск завершается, вызываем блок завершения с набором объектов `FlickrPhoto` и любыми ошибками.
         let activityIndicator = UIActivityIndicatorView(style: .gray)
         textField.addSubview(activityIndicator)
         activityIndicator.frame = textField.bounds
@@ -53,22 +50,20 @@ extension FlickrPhotosViewController: UITextFieldDelegate {
                 switch searchResults {
                 case .failure(let error):
                     ///# Все ошибки записываются в консоль.
-                    ///# Очевидно, что в производственном приложении вы захотите показать пользователю эти ошибки.
+                    ///# Можем показать ошибки юзеру.
                     print("Error searching: \(error)")
                 case .success(let results):
-                    ///# Затем вы регистрируете результаты и добавляете их в начало массива поиска.
+                    ///# Затем регистрируем результаты и добавляем их в начало массива поиска.
                     print("""
                     Found \(results.searchResults.count) \
                     matching \(results.searchTerm)
                     """)
                     self.searches.insert(results, at: 0)
-                    ///# Наконец, вы обновляете пользовательский интерфейс, чтобы показать новые данные.
-                    ///# Вы используете функцию `reloadData()`, которая работает так же, как и в табличном представлении
+                    ///# Обновляем ui, чтобы показать новые данные.
                     self.collectionView?.reloadData()
                 }
             }
-        }
-        
+        } 
         textField.text = nil
         textField.resignFirstResponder()
         return true
@@ -86,19 +81,12 @@ extension FlickrPhotosViewController {
                                  numberOfItemsInSection section: Int) -> Int {
         return searches[section].searchResults.count
     }
-    
-    ///# Это метод-заполнитель, возвращающий пустую ячейку.
-    ///# Вы заполните ее позже.
-    ///# Обратите внимание, что представления коллекции требуют регистрации ячейки с идентификатором повторного использования.
-    ///# В противном случае возникнет ошибка времени выполнения`(runtime error)`
+     
     override func collectionView(_ collectionView: UICollectionView,
                                  cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        ///# Теперь возвращаемая ячейка - это `FlickrPhotoCell`
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FlickrPhotoCell
-        ///# Вам нужно получить `FlickrPhoto`, представляющее фотографию для отображения, используя метод удобства, описанный заранее.
         let flickrPhoto = photo(for: indexPath)
         cell.backgroundColor = .white
-        ///# Вы заполняете представление изображения миниатюрой.
         cell.imageView.image = flickrPhoto.thumbnail
         
         return cell
@@ -110,11 +98,11 @@ extension FlickrPhotosViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
-        ///# Здесь вы определяете общее количество места, занимаемое `padding`
-        ///# У вас будет n + 1 равномерно распределенных мест, где n - количество элементов в ряду.
-        ///# Вы можете взять размер пространства из левой вставки раздела.
+        ///# Здесь определяем общее количество места, занимаемое `padding`
+        ///# У нас будет n + 1 равномерно распределенных мест, где n - количество элементов в ряду.
+        ///# Можно взять размер пространства из левой вставки раздела.
         ///# Вычитание этого значения из ширины представления и деление на количество элементов
-        ///# в ряду дает ширину для каждого элемента. Затем вы возвращаете размер в виде квадрата.
+        ///# в ряду дает ширину для каждого элемента. Затем возвращаем размер в виде квадрата.
         let paddingSpace = sectionInsets.left * (itemsPerRow + 1)
         let availableWidth = view.frame.width - paddingSpace
         let widthPerItem = availableWidth / itemsPerRow
@@ -131,7 +119,7 @@ extension FlickrPhotosViewController: UICollectionViewDelegateFlowLayout {
     }
     
     ///# Этот метод управляет расстоянием между каждой строкой в макете.
-    ///# Вы хотите, чтобы это расстояние совпадало с отступом слева и справа.
+    ///# Хотим, чтобы это расстояние совпадало с отступом слева и справа.
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
